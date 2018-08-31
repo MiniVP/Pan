@@ -13,7 +13,7 @@ verify-dev:
 verify:
   stage: test
   variables:
-    BOARD: "arduino:avr:pro"
+    BOARD: "arduino:avr:pro:cpu=8MHzatmega328"
   before_script:
     - mkdir -p /root/Arduino/libraries
     - cp -R libraries/* /root/Arduino/libraries/
