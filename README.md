@@ -1,4 +1,4 @@
-# MiniVP Pan
+![MiniVP Pan](img/banner.png)
 
 A set of autonomous single-sensor stations designed to last long.
 
@@ -9,3 +9,4 @@ A set of autonomous single-sensor stations designed to last long.
 See the README files inside those folders to get more information about each station.
 
 > This repository is mirrored to GitHub from https://gitlab.com/MiniVP/Pan.
+
