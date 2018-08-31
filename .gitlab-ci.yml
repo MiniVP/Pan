@@ -1,0 +1,11 @@
+image: slepp/arduino
+
+verify:
+  stage: test
+  variables:
+    BOARD: "arduino:avr:uno"
+  before_script:
+    - mkdir -p /root/Arduino/libraries
+    - cp -R libraries/* /root/Arduino/libraries/
+  script:
+    - find . -type f -name '*.ino' -not -path '*/.git/*' | xargs arduino --verify --verbose --board $BOARD
