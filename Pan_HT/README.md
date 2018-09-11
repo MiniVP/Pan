@@ -39,12 +39,13 @@ D13         | SD CLK
 3. Open `Pan_HT.ino` in the Arduino IDE.
 4. Edit the `DHT_PIN` and `SD_CS_PIN` constants if you need to move those pins.
 5. Edit the `DHT_TYPE` constant to match your DHT sensor type.
-6. (Un)comment the `USE_SD`, `USE_RTC`, `DEBUG` constants if you need to enable or disable specific features.
+6. (Un)comment the `USE_SD`, `USE_RTC`, `RTC_SET`, `DEBUG` constants if you need to enable or disable specific features.
 7. Load the firmware onto the Arduino.
 8. Have fun
 
 # Troubleshooting
 
+* **The LED turns on, then blinks twice in a loop** : The real-time clock reports an incorrect status. Check the RTC is properly connected and its date/time information is properly set.
 * **The LED turns on, then blinks 4 times in a loop** : The SD card initialization failed. Check the pinout and connection to the SD card reader and check the SD card is properly plugged in and works on another device.
 * **The LED turns on, then blinks 8 times in a loop** : The SD card was properly initialized but the `DATA.CSV` file could not be opened. Check that the card or file is not read-only, that there is still some disk space on the card, and that the card is properly formatted in FAT16 or FAT32 format as per the [Arduino recommendations](https://www.arduino.cc/en/Reference/SDCardNotes).
 * **The LED turns on and does not turn off** : The Arduino is stuck while trying to initialize either the real-time clock or the DHT. Check their pinouts and connections and try again.
