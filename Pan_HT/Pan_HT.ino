@@ -23,7 +23,7 @@
 #define DEBUG
 
 #ifdef DEBUG
- #define DEBUG_OUTPUT(x)  Serial.println(x)
+ #define DEBUG_OUTPUT(x) Serial.println(x)
 #else
  #define DEBUG_OUTPUT(x)
 #endif
@@ -85,7 +85,7 @@ void setup() {
     if(rtc.getStatus1() != 0) {
       // This byte is set at 0 when everything is fine and 255 when then clock is unplugged.
       // Let's assume the clock only works at 0
-      DEBUG_OUTPUT(F("RTC reports bad status bytes:"))
+      DEBUG_OUTPUT(F("RTC reports bad status bytes:"));
       DEBUG_OUTPUT(rtc.getStatus1());
       DEBUG_OUTPUT(rtc.getStatus2());
       blink(2);
