@@ -48,12 +48,16 @@
 #define UV_PIN A0
 #define UV_EN_PIN 10
 #define REF_PIN A1
+#define JUMPER_OUT_PIN 3
+#define JUMPER_IN_PIN 2
 
 String output = "";
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);
   pinMode(UV_EN_PIN, OUTPUT);
+  pinMode(JUMPER_IN_PIN, INPUT);
+  pinMode(JUMPER_OUT_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
   Serial.begin(115200);
 
@@ -91,6 +95,15 @@ void setup() {
     }
   #endif
 
+  digitalWrite(JUMPER_OUT_PIN, HIGH);
+  delay(100);
+  bool hasJumper = digitalRead(JUMPER_IN_PIN) == HIGH;
+  digitalWrite(JUMPER_OUT_PIN, LOW);
+
+  if (hasJumper) {
+    blink(100);
+  }
+
   digitalWrite(LED_PIN, LOW);
   delay(2000);
 }
@@ -105,7 +118,7 @@ void loop() {
   #endif
   digitalWrite(UV_EN_PIN, HIGH);
   delay(10);
-  output.concat(mapfloat(3.3 / averageAnalogRead(REF_PIN) * averageAnalogRead(UV_PIN), 0.99, 2.8, 0.0, 15.0));
+  output.concat(mapfloat(3.3 / averageAnalogRead(REF_PIN) * averageAnalogRead(UV_PIN), 0.976, 2.8, 0.0, 15.0));
   digitalWrite(UV_EN_PIN, LOW);
 
   DEBUG_OUTPUT(output);
