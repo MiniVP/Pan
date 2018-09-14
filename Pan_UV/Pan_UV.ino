@@ -16,11 +16,18 @@
  RTC GND => GND
  RTC SDA => SDA
  RTC SCL => SCL
+
+ Jumper pins: D2 -> D3
  */
 
 #define USE_SD
 #define USE_RTC
+#define USE_JUMPER
 #define DEBUG
+// How often the station should fetch data, in milliseconds
+#define FREQUENCY 300000
+// Station ID : model name, model type, revision, serial number, frequency
+#define STATION_ID "PAN-UV-A-1-300"
 
 #ifdef DEBUG
  #define DEBUG_OUTPUT(x) Serial.println(x)
@@ -44,12 +51,19 @@
   Rtc_Pcf8563 rtc;
 #endif
 
+#ifdef USE_JUMPER
+  #include <SerialCommand.h>
+  #define JUMPER_OUT_PIN 3
+  #define JUMPER_IN_PIN 2
+
+  SerialCommand sCmd;
+  bool hasJumper = false;
+#endif
+
 #define LED_PIN 9
 #define UV_PIN A0
 #define UV_EN_PIN 10
 #define REF_PIN A1
-#define JUMPER_OUT_PIN 3
-#define JUMPER_IN_PIN 2
 
 String output = "";
 
@@ -95,32 +109,41 @@ void setup() {
     }
   #endif
 
-  digitalWrite(JUMPER_OUT_PIN, HIGH);
-  delay(100);
-  bool hasJumper = digitalRead(JUMPER_IN_PIN) == HIGH;
-  digitalWrite(JUMPER_OUT_PIN, LOW);
+  #ifdef USE_JUMPER
+    digitalWrite(JUMPER_OUT_PIN, HIGH);
+    delay(100);
+    hasJumper = digitalRead(JUMPER_IN_PIN) == HIGH;
+    digitalWrite(JUMPER_OUT_PIN, LOW);
 
-  if (hasJumper) {
-    blink(100);
-  }
+    if (hasJumper) {
+      sCmd.addCommand("PING", ping);
+      sCmd.addCommand("ID", sendID);
+      sCmd.addCommand("GET", get);
+      #ifdef USE_SD
+        sCmd.addCommand("HARVEST", harvest);
+        sCmd.addCommand("CLEAR", clear);
+      #endif
+      #ifdef USE_RTC
+        sCmd.addCommand("TIMESTAMP", getTimestamp);
+        sCmd.addCommand("DATE", setDate);
+        sCmd.addCommand("TIME", setTime);
+      #endif
+      sCmd.setDefaultHandler(unknownCommand);
+      DEBUG_OUTPUT(F("Serial control activated"));
+    }
+  #endif
 
   digitalWrite(LED_PIN, LOW);
   delay(2000);
 }
 
 void loop() {
-  #ifdef USE_RTC
-    // ASIA=YYYY-MM-DD; US=MM/DD/YYYY; WORLD=DD-MM-YYYY
-    output.concat(rtc.formatDate(RTCC_DATE_ASIA));
-    output.concat(',');
-    output.concat(rtc.formatTime());
-    output.concat(',');
-  #endif
-  digitalWrite(UV_EN_PIN, HIGH);
-  delay(10);
-  output.concat(mapfloat(3.3 / averageAnalogRead(REF_PIN) * averageAnalogRead(UV_PIN), 0.976, 2.8, 0.0, 15.0));
-  digitalWrite(UV_EN_PIN, LOW);
+  if (hasJumper) {
+    sCmd.readSerial();
+    return;
+  }
 
+  buildOutput();
   DEBUG_OUTPUT(output);
   
   #ifdef USE_SD
@@ -131,7 +154,7 @@ void loop() {
   #endif
 
   output = "";
-  delay(5000);
+  delay(FREQUENCY);
 }
 
 void blink(byte nb) { 
@@ -165,3 +188,69 @@ float mapfloat(float x, float in_min, float in_max, float out_min, float out_max
 {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
+
+void buildOutput() {
+  #ifdef USE_RTC
+    // ASIA=YYYY-MM-DD; US=MM/DD/YYYY; WORLD=DD-MM-YYYY
+    output.concat(rtc.formatDate(RTCC_DATE_ASIA));
+    output.concat(',');
+    output.concat(rtc.formatTime());
+    output.concat(',');
+  #endif
+  digitalWrite(UV_EN_PIN, HIGH);
+  delay(10);
+  output.concat(mapfloat(3.3 / averageAnalogRead(REF_PIN) * averageAnalogRead(UV_PIN), 0.976, 2.8, 0.0, 15.0));
+  digitalWrite(UV_EN_PIN, LOW);
+}
+
+
+#ifdef USE_JUMPER
+  void ping() {
+    Serial.println(F("PONG"));
+  }
+
+  void sendID() {
+    Serial.println(F(STATION_ID));
+  }
+
+  // Get one reading
+  void get() {
+    buildOutput();
+    Serial.println(output);
+    output = "";
+  }
+
+  #ifdef USE_SD
+    // Get everything from the SD card
+    void harvest() {
+      // TODO
+    }
+
+    // Erase data from the SD card
+    void clear() {
+      // TODO
+    }
+  #endif
+
+  #ifdef USE_RTC
+    void getTimestamp() {
+      output.concat(rtc.formatDate(RTCC_DATE_ASIA));
+      output.concat('T');
+      output.concat(rtc.formatTime());
+      Serial.println(output);
+      output = "";
+    }
+
+    void setDate() {
+      // TODO
+    }
+
+    void setTime() {
+      // TODO
+    }
+  #endif
+
+  void unknownCommand(const char *command) {
+    Serial.println(F("Unknown command"));
+  }
+#endif
