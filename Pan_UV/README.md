@@ -24,6 +24,8 @@ Arduino Uno | Components
 GND         | SD GND, RTC GND, UV GND, LED GND
 SDA         | RTC SDA
 SCL         | RTC SCL
+D2          | Jumper output
+D3          | Jumper input
 D4          | SD CS
 D9          | LED
 D10         | UV EN
