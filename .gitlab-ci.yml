@@ -18,5 +18,5 @@ verify:
     - mkdir -p /root/Arduino/libraries
     - cp -R libraries/* /root/Arduino/libraries/
   script:
-    - find . -type f -name '*.ino' -not -path '*/.git/*' | xargs arduino --verify --verbose --board $BOARD
+    - find . -type f -name '*.ino' -not -path '*/.git/*' | xargs -n1 arduino --verify --verbose --board $BOARD
 
