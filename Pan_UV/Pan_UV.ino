@@ -1,5 +1,5 @@
 /*
- MiniVP Pan-UV v0.1
+ MiniVP Pan-UV v0.2-beta
  LED     => D9
  UV 3V3  => 3.3V
  UV EN   => D10
