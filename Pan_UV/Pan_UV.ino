@@ -106,7 +106,7 @@ void setup() {
       blink(4);
     } else {
       DEBUG_OUTPUT(F("SD init OK"));
-      openFile();
+      openFile(FILE_WRITE);
       if (!dataFile) {
         DEBUG_OUTPUT(F("File opening failed"));
         blink(8);
@@ -207,8 +207,8 @@ void buildOutput() {
     return SD.begin(SD_CS_PIN);
   }
 
-  void openFile() {
-    dataFile = SD.open(F("data.csv"), FILE_WRITE);
+  void openFile(uint8_t mode) {
+    dataFile = SD.open(F("data.csv"), mode);
   }
 #endif
 
@@ -246,12 +246,30 @@ void buildOutput() {
   #ifdef USE_SD
     // Get everything from the SD card
     void harvest() {
-      // TODO
+      if(!dataFile) {
+        if(!beginSD()) {
+          Serial.println(F("SD card initialization failed"));
+          return;
+        }
+        openFile(FILE_READ);
+        if(!dataFile) {
+          Serial.println(F("Data file opening failed"));
+          return;
+        }
+        while(dataFile.available()) {
+          Serial.write(dataFile.read());
+        }
+        dataFile.close();
+      }
     }
 
     // Erase data from the SD card
     void clear() {
-      // TODO
+      if(!beginSD()) {
+        Serial.println(F("SD card initialization failed"));
+        return;
+      }
+      Serial.println(SD.remove(F("data.csv")) ? F("OK") : F("Removal failed"));
     }
   #endif
 
