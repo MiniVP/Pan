@@ -41,7 +41,7 @@ A1          | Arduino 3.3V
 2. Move the contents of the `libraries/` folder into your Arduino IDE libraries folder.
 3. Open `Pan_UV.ino` in the Arduino IDE.
 4. Edit the `UV_PIN`, `UV_EN_PIN`, `REF_PIN`, `SD_CS_PIN`, `LED_PIN`, `JUMPER_IN_PIN` and `JUMPER_OUT_PIN` constants if you need to move those pins.
-5. (Un)comment the `USE_SD`, `USE_RTC`, `USE_JUMPER`, `DEBUG` constants if you need to enable or disable specific features.
+5. (Un)comment the `USE_SD`, `USE_RTC`, `USE_JUMPER`, `RTC_SET`, `DEBUG` constants if you need to enable or disable specific features.
 6. Load the firmware onto the Arduino.
 7. Have fun
 
