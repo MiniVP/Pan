@@ -75,40 +75,6 @@ void setup() {
   digitalWrite(LED_PIN, HIGH);
   Serial.begin(115200);
 
-  #ifdef USE_SD
-    if (!SD.begin(SD_CS_PIN)) {
-      DEBUG_OUTPUT(F("SD initialisation failed"));
-      blink(4);
-    } else {
-      DEBUG_OUTPUT(F("SD init OK"));
-      dataFile = SD.open(F("data.csv"), FILE_WRITE);
-      if (!dataFile) {
-        DEBUG_OUTPUT(F("File opening failed"));
-        blink(8);
-      }
-      DEBUG_OUTPUT(F("SD File data.csv opened OK"));
-    }
-  #endif
-  
-  #ifdef USE_RTC
-    rtc.initClock();
-    #ifdef RTC_SET
-    // day, weekday (0 sunday, 1 monday... 6 saturday), month, century (1=1900, 0=2000), year (0-99)
-    rtc.setDate(10, 1, 9, 0, 18);
-    // hours, minutes, seconds
-    rtc.setTime(13, 37, 42);
-    #endif
-    rtc.getTime();
-    if(rtc.getStatus1() != 0) {
-      // This byte is set at 0 when everything is fine and 255 when then clock is unplugged.
-      // Let's assume the clock only works at 0
-      DEBUG_OUTPUT(F("RTC reports bad status bytes:"));
-      DEBUG_OUTPUT(rtc.getStatus1());
-      DEBUG_OUTPUT(rtc.getStatus2());
-      blink(2);
-    }
-  #endif
-
   #ifdef USE_JUMPER
     digitalWrite(JUMPER_OUT_PIN, HIGH);
     delay(100);
@@ -130,6 +96,38 @@ void setup() {
       #endif
       sCmd.setDefaultHandler(unknownCommand);
       DEBUG_OUTPUT(F("Serial control activated"));
+      return;
+    }
+  #endif
+
+  #ifdef USE_SD
+    if (!beginSD()) {
+      DEBUG_OUTPUT(F("SD initialisation failed"));
+      blink(4);
+    } else {
+      DEBUG_OUTPUT(F("SD init OK"));
+      openFile();
+      if (!dataFile) {
+        DEBUG_OUTPUT(F("File opening failed"));
+        blink(8);
+      }
+      DEBUG_OUTPUT(F("SD File data.csv opened OK"));
+    }
+  #endif
+  
+  #ifdef USE_RTC
+    openRTC();
+    #ifdef RTC_SET
+      // day, weekday (0 sunday, 1 monday... 6 saturday), month, century (1=1900, 0=2000), year (0-99)
+      rtc.setDate(10, 1, 9, 0, 18);
+      // hours, minutes, seconds
+      rtc.setTime(13, 37, 42);
+    #endif
+    if(!checkRTC()) {
+      DEBUG_OUTPUT(F("RTC reports bad status bytes:"));
+      DEBUG_OUTPUT(rtc.getStatus1());
+      DEBUG_OUTPUT(rtc.getStatus2());
+      blink(2);
     }
   #endif
 
@@ -202,6 +200,31 @@ void buildOutput() {
   output.concat(mapfloat(3.3 / averageAnalogRead(REF_PIN) * averageAnalogRead(UV_PIN), 0.976, 2.8, 0.0, 15.0));
   digitalWrite(UV_EN_PIN, LOW);
 }
+
+
+#ifdef USE_SD
+  bool beginSD() {
+    return SD.begin(SD_CS_PIN);
+  }
+
+  void openFile() {
+    dataFile = SD.open(F("data.csv"), FILE_WRITE);
+  }
+#endif
+
+
+#ifdef USE_RTC
+  void openRTC() {
+    rtc.initClock();
+  }
+
+  bool checkRTC() {
+    rtc.getTime();
+    // This byte is set at 0 when everything is fine and 255 when then clock is unplugged.
+    // Let's assume the clock only works at 0
+    return rtc.getStatus1() != 0;
+  }
+#endif
 
 
 #ifdef USE_JUMPER
