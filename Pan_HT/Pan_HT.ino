@@ -20,6 +20,8 @@
 
 #include <DHT.h>
 
+#include "MiniVp.h"
+
 #define USE_SD
 #define USE_RTC
 #define USE_JUMPER
@@ -66,6 +68,7 @@
 #define DHT_TYPE DHT22
 
 DHT dht(DHT_PIN, DHT_TYPE);
+MiniVp miniVp(0);
 String output = "";
 
 void setup() {
@@ -75,6 +78,10 @@ void setup() {
   digitalWrite(LED_PIN, HIGH);
   Serial.begin(115200);
   dht.begin();
+
+  Serial.println(miniVp.coucouCestNous());
+  miniVp.setB(456);
+  Serial.println(miniVp.coucouCestNous());
 
   #ifdef USE_JUMPER
     digitalWrite(JUMPER_OUT_PIN, HIGH);
