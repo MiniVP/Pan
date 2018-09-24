@@ -1,5 +1,5 @@
 /*
- MiniVP Pan-UV v0.2-beta
+ MiniVP Pan-UV v0.2
  LED     => D9
  UV 3V3  => 3.3V
  UV EN   => D10
@@ -283,11 +283,33 @@ void buildOutput() {
     }
 
     void setDate() {
-      // TODO
+      int year = atoi(sCmd.next());
+      byte month = atoi(sCmd.next());
+      byte day = atoi(sCmd.next());
+      if(year < 1900 || year >= 2100 || month < 1 || month > 12 || day < 1 || day > 31) {
+        Serial.println(F("Bad date format"));
+        return;
+      }
+
+      // day, weekday (0 sunday, 1 monday... 6 saturday), month, century (1=1900, 0=2000), year (0-99)
+      // Weekday is not used anywhere so we will not care about it
+      rtc.setDate(day, 0, month, (year < 2000) ? 1 : 0, year % 100);
+
+      // Output the set date and time
+      getTimestamp();
     }
 
     void setTime() {
-      // TODO
+      byte h = atoi(sCmd.next());
+      byte m = atoi(sCmd.next());
+      byte s = atoi(sCmd.next());
+      if(h < 0 || h >= 24 || m < 0 || m >= 60 || s < 0 || s > 60) {
+        Serial.println(F("Bad time format"));
+        return;
+      }
+      rtc.setTime(h, m, s);
+      // Output the set date and time
+      getTimestamp();
     }
   #endif
 
