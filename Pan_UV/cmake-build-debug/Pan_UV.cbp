@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Pan_UV"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_CLEAN">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_CLEAN"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_UPLOAD">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_UPLOAD"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_BUILD">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_BUILD"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_TEST">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_TEST"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_UPLOADFS">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_UPLOADFS"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_REBUILD_PROJECT_INDEX">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_REBUILD_PROJECT_INDEX"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_UPDATE_ALL">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_UPDATE_ALL"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_PROGRAM">
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_PROGRAM"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Pan_UV">
+				<Option output="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Pan_UV" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/cores/arduino"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/variants/standard"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/EEPROM/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/HID/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SPI/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SoftwareSerial/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/Wire/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground/utility"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Bridge/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Esplora/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Ethernet/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Firmata"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Firmata/utility"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/GSM/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Keyboard/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/LiquidCrystal/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Mouse/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/RobotIRremote/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Robot_Control/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Robot_Motor/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/SD/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Servo/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/SpacebrewYun/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Stepper/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/TFT/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Temboo/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/WiFi/src"/>
+					<Add directory="/home/valentin/.platformio/packages/toolchain-atmelavr/avr/include"/>
+					<Add directory="/home/valentin/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include"/>
+					<Add directory="/home/valentin/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include-fixed"/>
+					<Add directory="/home/valentin/.platformio/packages/tool-unity"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 Pan_UV"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Pan_UV/fast">
+				<Option output="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Pan_UV" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/cores/arduino"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/variants/standard"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/EEPROM/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/HID/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SPI/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SoftwareSerial/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/Wire/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground/utility"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Bridge/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Esplora/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Ethernet/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Firmata"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Firmata/utility"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/GSM/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Keyboard/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/LiquidCrystal/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Mouse/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/RobotIRremote/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Robot_Control/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Robot_Motor/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/SD/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Servo/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/SpacebrewYun/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Stepper/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/TFT/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/Temboo/src"/>
+					<Add directory="/home/valentin/.platformio/packages/framework-arduinoavr/libraries/WiFi/src"/>
+					<Add directory="/home/valentin/.platformio/packages/toolchain-atmelavr/avr/include"/>
+					<Add directory="/home/valentin/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include"/>
+					<Add directory="/home/valentin/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include-fixed"/>
+					<Add directory="/home/valentin/.platformio/packages/tool-unity"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 Pan_UV/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/valentin/Documents/Projets/Pan/Pan_UV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/.library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/DHT.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/DHT.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/README.md">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/examples/DHT_Test/DHT_Test.pde">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/keywords.txt">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/license.txt">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/DHT_ID1671/readme.pdf">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/.library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/README.rst">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/Rtc_Pcf8563.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/Rtc_Pcf8563.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/examples/lcd_clock/lcd_clock.pde">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/examples/set_alarm/set_alarm.pde">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/examples/set_clock/set_clock.pde">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/keywords.txt">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/Rtc_Pcf8563_ID193/library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/.github/ISSUE_TEMPLATE.md">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/.github/PULL_REQUEST_TEMPLATE.md">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/.library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/File.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/README.txt">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/SD.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/SD.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/examples/CardInfo/CardInfo.ino">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/examples/Datalogger/Datalogger.ino">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/examples/DumpFile/DumpFile.ino">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/examples/Files/Files.ino">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/examples/ReadWrite/ReadWrite.ino">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/examples/listfiles/listfiles.ino">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/keywords.txt">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/FatStructs.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/Sd2Card.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/Sd2Card.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/Sd2PinMap.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/SdFat.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/SdFatUtil.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/SdFatmainpage.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/SdFile.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/SdInfo.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SD_ID161/utility/SdVolume.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SerialCommand_ID173/.library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SerialCommand_ID173/SerialCommand.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SerialCommand_ID173/SerialCommand.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SerialCommand_ID173/examples/SerialCommandExample/SerialCommandExample.pde">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SerialCommand_ID173/keywords.txt">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SerialCommand_ID173/library.json">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/.piolibdeps/SerialCommand_ID173/readme.md">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/lib/Pan/Pan.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/lib/Pan/Pan.h">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/lib/readme.txt">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/src/main.cpp">
+			<Option target="Pan_UV"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/valentin/Documents/Projets/Pan/Pan_UV/CMakeListsPrivate.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -10,13 +10,13 @@
   #define STATION_ID "PAN--A-1-300"
 #endif
 
-#ifdef DEBUG
+#ifdef DEBUG == 1
  #define DEBUG_OUTPUT(x) Serial.println(x)
 #else
  #define DEBUG_OUTPUT(x)
 #endif
 
-#ifdef USE_SD
+#ifdef USE_SD == 1
   #include <SPI.h>
   #include <SD.h>
   
@@ -25,11 +25,11 @@
   #endif
 #endif
 
-#ifdef USE_RTC
+#ifdef USE_RTC == 1
   #include <Rtc_Pcf8563.h>
 #endif
 
-#ifdef USE_JUMPER
+#ifdef USE_JUMPER == 1
   #include <SerialCommand.h>
   #ifndef JUMPER_OUT_PIN
     #define JUMPER_OUT_PIN 3
@@ -39,20 +39,17 @@
   #endif
 #endif
 
-#ifndef LED_PIN
-  #define LED_PIN 9
-#endif
-
 class Pan
 {
     public:
-        Pan();
+        Pan(byte ledPin = 9);
         virtual void begin();
         virtual void loop();
         virtual String buildOutput();
     protected:
         String output;
         void blink(byte);
+        byte ledPin = 9;
         #ifdef USE_SD
             File dataFile;
             bool beginSD();

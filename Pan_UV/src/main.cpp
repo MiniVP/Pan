@@ -20,21 +20,12 @@
  Jumper pins: D2 -> D3
  */
 
-#define USE_SD
-#define USE_RTC
-#define USE_JUMPER
-#define DEBUG
-// How often the station should fetch data, in milliseconds
-#define FREQUENCY 300000
-// Station ID : model name, model type, revision, serial number, frequency
-#define STATION_ID "PAN-UV-A-1-300"
-
 #define LED_PIN 9
 #define UV_PIN A0
 #define UV_EN_PIN 10
 #define REF_PIN A1
 
-#include <Pan.h>
+#include "Pan.h"
 
 class PanUV: public Pan {
   public:

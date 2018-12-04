@@ -1,10 +1,7 @@
 #include "Pan.h"
 
-Pan::Pan() : output("")
+Pan::Pan(byte ledPin) : output(""), hasJumper(hasJumper)
 {
-  #ifdef USE_JUMPER
-    hasJumper = false;
-  #endif
 }
 
 void Pan::begin() {
