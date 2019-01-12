@@ -1,6 +1,6 @@
 #include "Pan.h"
 
-Pan::Pan(byte ledPin) : output(""), hasJumper(hasJumper)
+Pan::Pan() : output(""), hasJumper(false)
 {
 }
 
@@ -8,9 +8,8 @@ void Pan::begin() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
   Serial.begin(115200);
-  DEBUG_OUTPUT(F("COUCOU"));
 
-  #ifdef USE_JUMPER
+  #if USE_JUMPER == 1
     pinMode(JUMPER_IN_PIN, INPUT);
     pinMode(JUMPER_OUT_PIN, OUTPUT);
     digitalWrite(JUMPER_OUT_PIN, HIGH);
@@ -22,11 +21,11 @@ void Pan::begin() {
       sCmd.addCommand("PING", ping);
       sCmd.addCommand("ID", sendID);
       sCmd.addCommand("GET", get);
-      #ifdef USE_SD
+      #if USE_SD == 1
         sCmd.addCommand("HARVEST", harvest);
         sCmd.addCommand("CLEAR", clear);
       #endif
-      #ifdef USE_RTC
+      #if USE_RTC == 1
         sCmd.addCommand("TIMESTAMP", getTimestamp);
         sCmd.addCommand("DATE", setDate);
         sCmd.addCommand("TIME", setTime);
@@ -37,7 +36,7 @@ void Pan::begin() {
     }
   #endif
 
-  #ifdef USE_SD
+  #if USE_SD == 1
     if (!beginSD()) {
       DEBUG_OUTPUT(F("SD initialisation failed"));
       blink(4);
@@ -52,9 +51,9 @@ void Pan::begin() {
     }
   #endif
   
-  #ifdef USE_RTC
+  #if USE_RTC == 1
     openRTC();
-    #ifdef RTC_SET
+    #if RTC_SET == 1
       // day, weekday (0 sunday, 1 monday... 6 saturday), month, century (1=1900, 0=2000), year (0-99)
       rtc.setDate(10, 1, 9, 0, 18);
       // hours, minutes, seconds
@@ -73,7 +72,7 @@ void Pan::begin() {
 }
 
 void Pan::loop() {
-  #ifdef USE_JUMPER
+  #if USE_JUMPER == 1
     if (hasJumper) {
       sCmd.readSerial();
       return;
@@ -83,7 +82,7 @@ void Pan::loop() {
   buildOutput();
   DEBUG_OUTPUT(output);
   
-  #ifdef USE_SD
+  #if USE_SD == 1
     if (dataFile) {
       dataFile.println(output);
       dataFile.flush();
@@ -96,7 +95,7 @@ void Pan::loop() {
 
 String Pan::buildOutput() {
   output = "";
-  #ifdef USE_RTC
+  #if USE_RTC == 1
     // ASIA=YYYY-MM-DD; US=MM/DD/YYYY; WORLD=DD-MM-YYYY
     output.concat(rtc.formatDate(RTCC_DATE_ASIA));
     output.concat(',');
@@ -119,7 +118,7 @@ void Pan::blink(byte nb) {
   }
 }
 
-#ifdef USE_SD
+#if USE_SD == 1
   bool Pan::beginSD() {
     return SD.begin(SD_CS_PIN);
   }
@@ -130,20 +129,20 @@ void Pan::blink(byte nb) {
 #endif
 
 
-#ifdef USE_RTC
+#if USE_RTC == 1
   void Pan::openRTC() {
     rtc.initClock();
   }
 
   bool Pan::checkRTC() {
     rtc.getTime();
-    // This byte is set at 0 when everything is fine and 255 when then clock is unplugged.
+    // This byte is set at 0 when everything is fine and 255 when the clock is unplugged.
     // Let's assume the clock only works at 0
     return rtc.getStatus1() != 0;
   }
 #endif
 
-#ifdef USE_JUMPER
+#if USE_JUMPER == 1
   void Pan::ping() {
     Serial.println(F("PONG"));
   }
@@ -159,7 +158,7 @@ void Pan::blink(byte nb) {
     output = "";
   }
 
-  #ifdef USE_SD
+  #if USE_SD == 1
     // Get everything from the SD card
     void Pan::harvest() {
       if(!dataFile) {
@@ -189,7 +188,7 @@ void Pan::blink(byte nb) {
     }
   #endif
 
-  #ifdef USE_RTC
+  #if USE_RTC == 1
     void Pan::getTimestamp() {
       output.concat(rtc.formatDate(RTCC_DATE_ASIA));
       output.concat('T');
