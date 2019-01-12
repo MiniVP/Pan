@@ -1,2 +1,10 @@
-# Visual Studio Code
+# IDEs
 .vscode/
+.idea/
+
+# PlatformIO
+.pioenvs
+.piolibdeps
+CMakeLists.txt
+CMakeListsPrivate.txt
+cmake-build-debug/
