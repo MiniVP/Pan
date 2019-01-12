@@ -1,6 +1,10 @@
 #include "Pan.h"
 
+#if USE_JUMPER == 1
 Pan::Pan() : output(""), hasJumper(false)
+#else
+Pan::Pan() : output("")
+#endif
 {
 }
 
@@ -18,17 +22,17 @@ void Pan::begin() {
     digitalWrite(JUMPER_OUT_PIN, LOW);
 
     if (hasJumper) {
-      sCmd.addCommand("PING", ping);
-      sCmd.addCommand("ID", sendID);
-      sCmd.addCommand("GET", get);
+      sCmd.addCommand(PSTR("PING"), ping);
+      sCmd.addCommand(PSTR("ID"), sendID);
+      sCmd.addCommand(PSTR("GET"), get);
       #if USE_SD == 1
-        sCmd.addCommand("HARVEST", harvest);
-        sCmd.addCommand("CLEAR", clear);
+        sCmd.addCommand(PSTR("HARVEST"), harvest);
+        sCmd.addCommand(PSTR("CLEAR"), clear);
       #endif
       #if USE_RTC == 1
-        sCmd.addCommand("TIMESTAMP", getTimestamp);
-        sCmd.addCommand("DATE", setDate);
-        sCmd.addCommand("TIME", setTime);
+        sCmd.addCommand(PSTR("TIMESTAMP"), getTimestamp);
+        sCmd.addCommand(PSTR("DATE"), setDate);
+        sCmd.addCommand(PSTR("TIME"), setTime);
       #endif
       sCmd.setDefaultHandler(unknownCommand);
       DEBUG_OUTPUT(F("Serial control activated"));
@@ -124,7 +128,7 @@ void Pan::blink(byte nb) {
   }
 
   void Pan::openFile(uint8_t mode) {
-    dataFile = SD.open(F("data.csv"), mode);
+    dataFile = SD.open(PSTR("data.csv"), mode);
   }
 #endif
 
@@ -184,7 +188,7 @@ void Pan::blink(byte nb) {
         Serial.println(F("SD card initialization failed"));
         return;
       }
-      Serial.println(SD.remove(F("data.csv")) ? F("OK") : F("Removal failed"));
+      Serial.println(SD.remove(PSTR("data.csv")) ? F("OK") : F("Removal failed"));
     }
   #endif
 

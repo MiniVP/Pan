@@ -62,7 +62,7 @@ class Pan
         #if USE_RTC == 1
             Rtc_Pcf8563 rtc;
             void openRTC();
-            void checkRTC();
+            bool checkRTC();
         #endif
         #if USE_JUMPER == 1
             SerialCommand sCmd;
