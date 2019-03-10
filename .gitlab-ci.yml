@@ -2,6 +2,13 @@ image: johannweging/platformio
 stages:
   - test
 
+variables:
+  PLATFORMIO_HOME_DIR: "$CI_PROJECT_DIR/.platformio"
+
+cache:
+  paths:
+    - .platformio
+
 before_script:
   - pio update
 
