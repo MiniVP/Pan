@@ -35,12 +35,14 @@
 #endif
 
 #if USE_JUMPER == 1
-  #include <SerialCommand.h>
   #ifndef JUMPER_OUT_PIN
     #define JUMPER_OUT_PIN 3
   #endif
   #ifndef JUMPER_IN_PIN
     #define JUMPER_IN_PIN 2
+  #endif
+  #ifndef SERIAL_BUFFER_SIZE
+    #define SERIAL_BUFFER_SIZE 32
   #endif
 #endif
 
@@ -65,12 +67,18 @@ class Pan
             bool checkRTC();
         #endif
         #if USE_JUMPER == 1
-            SerialCommand sCmd;
             bool hasJumper;
+            char delim[2];
+            char buffer[SERIAL_BUFFER_SIZE + 1];
+            byte bufPos;
+            char *last;
+            void clearBuffer();
+            void readSerial();
+            char *nextArg();
             void ping();
             void sendID();
             void get();
-            void unknownCommand();
+            void unknownCommand(const char*);
             #if USE_SD == 1
                 void harvest();
                 void clear();

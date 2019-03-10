@@ -1,12 +1,13 @@
 #include "Pan.h"
 
 #if USE_JUMPER == 1
-Pan::Pan() : output(""), hasJumper(false)
+  Pan::Pan() : output(""), hasJumper(false), last(NULL) {
+    strcpy(delim, " "); // strtok_r needs a null-terminated string
+    clearBuffer();
+  }
 #else
-Pan::Pan() : output("")
+  Pan::Pan() : output("") {}
 #endif
-{
-}
 
 void Pan::begin() {
   pinMode(LED_PIN, OUTPUT);
@@ -22,19 +23,6 @@ void Pan::begin() {
     digitalWrite(JUMPER_OUT_PIN, LOW);
 
     if (hasJumper) {
-      sCmd.addCommand(PSTR("PING"), ping);
-      sCmd.addCommand(PSTR("ID"), sendID);
-      sCmd.addCommand(PSTR("GET"), get);
-      #if USE_SD == 1
-        sCmd.addCommand(PSTR("HARVEST"), harvest);
-        sCmd.addCommand(PSTR("CLEAR"), clear);
-      #endif
-      #if USE_RTC == 1
-        sCmd.addCommand(PSTR("TIMESTAMP"), getTimestamp);
-        sCmd.addCommand(PSTR("DATE"), setDate);
-        sCmd.addCommand(PSTR("TIME"), setTime);
-      #endif
-      sCmd.setDefaultHandler(unknownCommand);
       DEBUG_OUTPUT(F("Serial control activated"));
       return;
     }
@@ -78,12 +66,12 @@ void Pan::begin() {
 void Pan::loop() {
   #if USE_JUMPER == 1
     if (hasJumper) {
-      sCmd.readSerial();
+      readSerial();
       return;
     }
   #endif
 
-  buildOutput();
+  output = buildOutput();
   DEBUG_OUTPUT(output);
   
   #if USE_SD == 1
@@ -128,7 +116,7 @@ void Pan::blink(byte nb) {
   }
 
   void Pan::openFile(uint8_t mode) {
-    dataFile = SD.open(PSTR("data.csv"), mode);
+    dataFile = SD.open("data.csv", mode);
   }
 #endif
 
@@ -142,11 +130,48 @@ void Pan::blink(byte nb) {
     rtc.getTime();
     // This byte is set at 0 when everything is fine and 255 when the clock is unplugged.
     // Let's assume the clock only works at 0
-    return rtc.getStatus1() != 0;
+    return rtc.getStatus1() == 0;
   }
 #endif
 
 #if USE_JUMPER == 1
+  void Pan::clearBuffer() {
+    buffer[0] = '\0';
+    bufPos = 0;
+  }
+
+  void Pan::readSerial() {
+    while (Serial.available() > 0) {
+      char inChar = Serial.read();
+      if (inChar == '\n') {
+        char *command = strtok_r(buffer, delim, &last);
+        if (command != NULL) {
+          if (strncmp(command, "PING", 4) == 0) ping();
+          else if (strncmp(command, "ID", 2) == 0) sendID();
+          else if (strncmp(command, "GET", 3) == 0) get();
+          #if USE_SD == 1
+          else if (strncmp(command, "HARVEST", 7) == 0) harvest();
+          else if (strncmp(command, "CLEAR", 5) == 0) clear();
+          #endif
+          #if USE_RTC == 1
+          else if (strncmp(command, "TIMESTAMP", 9) == 0) getTimestamp();
+          else if (strncmp(command, "DATE", 4) == 0) setDate();
+          else if (strncmp(command, "TIME", 4) == 0) setTime();
+          #endif
+          else unknownCommand(command);
+        }
+        clearBuffer();
+      } else if (isprint(inChar) && bufPos < SERIAL_BUFFER_SIZE) {
+        buffer[bufPos++] = inChar;
+        buffer[bufPos] = '\0';
+      }
+    }
+  }
+
+  char *Pan::nextArg() {
+    return strtok_r(NULL, delim, &last);
+  }
+
   void Pan::ping() {
     Serial.println(F("PONG"));
   }
@@ -157,8 +182,7 @@ void Pan::blink(byte nb) {
 
   // Get one reading
   void Pan::get() {
-    buildOutput();
-    Serial.println(output);
+    Serial.println(buildOutput());
     output = "";
   }
 
@@ -202,9 +226,9 @@ void Pan::blink(byte nb) {
     }
 
     void Pan::setDate() {
-      int year = atoi(sCmd.next());
-      byte month = atoi(sCmd.next());
-      byte day = atoi(sCmd.next());
+      int year = atoi(nextArg());
+      byte month = atoi(nextArg());
+      byte day = atoi(nextArg());
       if(year < 1900 || year >= 2100 || month < 1 || month > 12 || day < 1 || day > 31) {
         Serial.println(F("Bad date format"));
         return;
@@ -219,9 +243,9 @@ void Pan::blink(byte nb) {
     }
 
     void Pan::setTime() {
-      byte h = atoi(sCmd.next());
-      byte m = atoi(sCmd.next());
-      byte s = atoi(sCmd.next());
+      byte h = atoi(nextArg());
+      byte m = atoi(nextArg());
+      byte s = atoi(nextArg());
       if(h < 0 || h >= 24 || m < 0 || m >= 60 || s < 0 || s > 60) {
         Serial.println(F("Bad time format"));
         return;

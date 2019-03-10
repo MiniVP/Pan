@@ -20,10 +20,18 @@
  Jumper pins: D2 -> D3
  */
 
+#ifndef LED_PIN
 #define LED_PIN 9
+#endif
+#ifndef UV_PIN
 #define UV_PIN A0
+#endif
+#ifndef UV_EN_PIN
 #define UV_EN_PIN 10
+#endif
+#ifndef REF_PIN
 #define REF_PIN A1
+#endif
 
 #include "Pan.h"
 
