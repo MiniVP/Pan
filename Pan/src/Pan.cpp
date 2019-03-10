@@ -1,107 +1,34 @@
-/*
- MiniVP Pan-HT v0.2
- DHT 1 => 5V or 3.3V
- DHT 2 => D8
- DHT 4 => GND
- LED => D9
- SD 3V3  => 3.3V
- SD GND  => GND
- SD CS   => D4
- SD MOSI => D11
- SD MISO => D12
- SD CLK  => D13
- RTC VCC => 5V or 3.3V
- RTC GND => GND
- RTC SDA => SDA
- RTC SCL => SCL
+#include "Pan.h"
 
- Jumper pins: D2 -> D3
- */
-
-#include <DHT.h>
-
-#define USE_SD
-#define USE_RTC
-#define USE_JUMPER
-#define DEBUG
-// How often the station should fetch data, in milliseconds
-#define FREQUENCY 300000
-// Station ID : model name, model type, revision, serial number, frequency
-#define STATION_ID "PAN-HT-A-1-300"
-
-#ifdef DEBUG
- #define DEBUG_OUTPUT(x) Serial.println(x)
+#if USE_JUMPER == 1
+  Pan::Pan() : output(""), hasJumper(false), last(NULL) {
+    strcpy(delim, " "); // strtok_r needs a null-terminated string
+    clearBuffer();
+  }
 #else
- #define DEBUG_OUTPUT(x)
+  Pan::Pan() : output("") {}
 #endif
 
-#ifdef USE_SD
-  #include <SPI.h>
-  #include <SD.h>
-  
-  #define SD_CS_PIN 4
-  
-  File dataFile;
-#endif
-
-#ifdef USE_RTC
-  #include <Rtc_Pcf8563.h>
-  //#define RTC_SET
-
-  Rtc_Pcf8563 rtc;
-#endif
-
-#ifdef USE_JUMPER
-  #include <SerialCommand.h>
-  #define JUMPER_OUT_PIN 3
-  #define JUMPER_IN_PIN 2
-
-  SerialCommand sCmd;
-  bool hasJumper = false;
-#endif
-
-#define LED_PIN 9
-#define DHT_PIN 8
-// DHT11, DHT21, DHT22
-#define DHT_TYPE DHT22
-
-DHT dht(DHT_PIN, DHT_TYPE);
-String output = "";
-
-void setup() {
+void Pan::begin() {
   pinMode(LED_PIN, OUTPUT);
-  pinMode(JUMPER_IN_PIN, INPUT);
-  pinMode(JUMPER_OUT_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
   Serial.begin(115200);
-  dht.begin();
 
-  #ifdef USE_JUMPER
+  #if USE_JUMPER == 1
+    pinMode(JUMPER_IN_PIN, INPUT);
+    pinMode(JUMPER_OUT_PIN, OUTPUT);
     digitalWrite(JUMPER_OUT_PIN, HIGH);
     delay(100);
     hasJumper = digitalRead(JUMPER_IN_PIN) == HIGH;
     digitalWrite(JUMPER_OUT_PIN, LOW);
 
     if (hasJumper) {
-      sCmd.addCommand("PING", ping);
-      sCmd.addCommand("ID", sendID);
-      sCmd.addCommand("GET", get);
-      #ifdef USE_SD
-        sCmd.addCommand("HARVEST", harvest);
-        sCmd.addCommand("CLEAR", clear);
-      #endif
-      #ifdef USE_RTC
-        sCmd.addCommand("TIMESTAMP", getTimestamp);
-        sCmd.addCommand("DATE", setDate);
-        sCmd.addCommand("TIME", setTime);
-      #endif
-      sCmd.setDefaultHandler(unknownCommand);
       DEBUG_OUTPUT(F("Serial control activated"));
       return;
     }
   #endif
 
-  #ifdef USE_SD
+  #if USE_SD == 1
     if (!beginSD()) {
       DEBUG_OUTPUT(F("SD initialisation failed"));
       blink(4);
@@ -116,9 +43,9 @@ void setup() {
     }
   #endif
   
-  #ifdef USE_RTC
+  #if USE_RTC == 1
     openRTC();
-    #ifdef RTC_SET
+    #if RTC_SET == 1
       // day, weekday (0 sunday, 1 monday... 6 saturday), month, century (1=1900, 0=2000), year (0-99)
       rtc.setDate(10, 1, 9, 0, 18);
       // hours, minutes, seconds
@@ -136,16 +63,18 @@ void setup() {
   delay(2000);
 }
 
-void loop() {
-  if (hasJumper) {
-    sCmd.readSerial();
-    return;
-  }
+void Pan::loop() {
+  #if USE_JUMPER == 1
+    if (hasJumper) {
+      readSerial();
+      return;
+    }
+  #endif
 
-  buildOutput();
+  output = buildOutput();
   DEBUG_OUTPUT(output);
   
-  #ifdef USE_SD
+  #if USE_SD == 1
     if (dataFile) {
       dataFile.println(output);
       dataFile.flush();
@@ -156,7 +85,19 @@ void loop() {
   delay(FREQUENCY);
 }
 
-void blink(byte nb) { 
+String Pan::buildOutput() {
+  output = "";
+  #if USE_RTC == 1
+    // ASIA=YYYY-MM-DD; US=MM/DD/YYYY; WORLD=DD-MM-YYYY
+    output.concat(rtc.formatDate(RTCC_DATE_ASIA));
+    output.concat(',');
+    output.concat(rtc.formatTime());
+    output.concat(',');
+  #endif
+  return output;
+}
+
+void Pan::blink(byte nb) { 
   while (true) {
     for (byte i = 0; i < nb; i++) {
       digitalWrite(LED_PIN, LOW);
@@ -169,64 +110,85 @@ void blink(byte nb) {
   }
 }
 
-void buildOutput() {
-  #ifdef USE_RTC
-    // ASIA=YYYY-MM-DD; US=MM/DD/YYYY; WORLD=DD-MM-YYYY
-    output.concat(rtc.formatDate(RTCC_DATE_ASIA));
-    output.concat(',');
-    output.concat(rtc.formatTime());
-    output.concat(',');
-  #endif
-  output.concat(dht.readTemperature());
-  output.concat(',');
-  output.concat(dht.readHumidity());
-}
-
-
-#ifdef USE_SD
-  bool beginSD() {
+#if USE_SD == 1
+  bool Pan::beginSD() {
     return SD.begin(SD_CS_PIN);
   }
 
-  void openFile(uint8_t mode) {
-    dataFile = SD.open(F("data.csv"), mode);
+  void Pan::openFile(uint8_t mode) {
+    dataFile = SD.open("data.csv", mode);
   }
 #endif
 
 
-#ifdef USE_RTC
-  void openRTC() {
+#if USE_RTC == 1
+  void Pan::openRTC() {
     rtc.initClock();
   }
 
-  bool checkRTC() {
+  bool Pan::checkRTC() {
     rtc.getTime();
-    // This byte is set at 0 when everything is fine and 255 when then clock is unplugged.
+    // This byte is set at 0 when everything is fine and 255 when the clock is unplugged.
     // Let's assume the clock only works at 0
-    return rtc.getStatus1() != 0;
+    return rtc.getStatus1() == 0;
   }
 #endif
 
+#if USE_JUMPER == 1
+  void Pan::clearBuffer() {
+    buffer[0] = '\0';
+    bufPos = 0;
+  }
 
-#ifdef USE_JUMPER
-  void ping() {
+  void Pan::readSerial() {
+    while (Serial.available() > 0) {
+      char inChar = Serial.read();
+      if (inChar == '\n') {
+        char *command = strtok_r(buffer, delim, &last);
+        if (command != NULL) {
+          if (strncmp(command, "PING", 4) == 0) ping();
+          else if (strncmp(command, "ID", 2) == 0) sendID();
+          else if (strncmp(command, "GET", 3) == 0) get();
+          #if USE_SD == 1
+          else if (strncmp(command, "HARVEST", 7) == 0) harvest();
+          else if (strncmp(command, "CLEAR", 5) == 0) clear();
+          #endif
+          #if USE_RTC == 1
+          else if (strncmp(command, "TIMESTAMP", 9) == 0) getTimestamp();
+          else if (strncmp(command, "DATE", 4) == 0) setDate();
+          else if (strncmp(command, "TIME", 4) == 0) setTime();
+          #endif
+          else unknownCommand(command);
+        }
+        clearBuffer();
+      } else if (isprint(inChar) && bufPos < SERIAL_BUFFER_SIZE) {
+        buffer[bufPos++] = inChar;
+        buffer[bufPos] = '\0';
+      }
+    }
+  }
+
+  char *Pan::nextArg() {
+    return strtok_r(NULL, delim, &last);
+  }
+
+  void Pan::ping() {
     Serial.println(F("PONG"));
   }
 
-  void sendID() {
+  void Pan::sendID() {
     Serial.println(F(STATION_ID));
   }
 
   // Get one reading
-  void get() {
-    buildOutput();
-    Serial.println(output);
+  void Pan::get() {
+    Serial.println(buildOutput());
     output = "";
   }
 
-  #ifdef USE_SD
+  #if USE_SD == 1
     // Get everything from the SD card
-    void harvest() {
+    void Pan::harvest() {
       if(!dataFile) {
         if(!beginSD()) {
           Serial.println(F("SD card initialization failed"));
@@ -245,17 +207,17 @@ void buildOutput() {
     }
 
     // Erase data from the SD card
-    void clear() {
+    void Pan::clear() {
       if(!beginSD()) {
         Serial.println(F("SD card initialization failed"));
         return;
       }
-      Serial.println(SD.remove(F("data.csv")) ? F("OK") : F("Removal failed"));
+      Serial.println(SD.remove(PSTR("data.csv")) ? F("OK") : F("Removal failed"));
     }
   #endif
 
-  #ifdef USE_RTC
-    void getTimestamp() {
+  #if USE_RTC == 1
+    void Pan::getTimestamp() {
       output.concat(rtc.formatDate(RTCC_DATE_ASIA));
       output.concat('T');
       output.concat(rtc.formatTime());
@@ -263,10 +225,10 @@ void buildOutput() {
       output = "";
     }
 
-    void setDate() {
-      int year = atoi(sCmd.next());
-      byte month = atoi(sCmd.next());
-      byte day = atoi(sCmd.next());
+    void Pan::setDate() {
+      int year = atoi(nextArg());
+      byte month = atoi(nextArg());
+      byte day = atoi(nextArg());
       if(year < 1900 || year >= 2100 || month < 1 || month > 12 || day < 1 || day > 31) {
         Serial.println(F("Bad date format"));
         return;
@@ -280,10 +242,10 @@ void buildOutput() {
       getTimestamp();
     }
 
-    void setTime() {
-      byte h = atoi(sCmd.next());
-      byte m = atoi(sCmd.next());
-      byte s = atoi(sCmd.next());
+    void Pan::setTime() {
+      byte h = atoi(nextArg());
+      byte m = atoi(nextArg());
+      byte s = atoi(nextArg());
       if(h < 0 || h >= 24 || m < 0 || m >= 60 || s < 0 || s > 60) {
         Serial.println(F("Bad time format"));
         return;
@@ -294,7 +256,7 @@ void buildOutput() {
     }
   #endif
 
-  void unknownCommand(const char *command) {
+  void Pan::unknownCommand(const char *command) {
     Serial.println(F("Unknown command"));
   }
 #endif
