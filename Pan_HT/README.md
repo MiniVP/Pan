@@ -5,8 +5,7 @@
 Required components :
 
 * Arduino (tested with Uno R3 and Pro Mini)
-* DHT-11, DHT-21 (AM2301) or DHT-22 (AM2302, AM2320, AM2321) sensor  
-  *Set the sensor type in the `#define DHT_TYPE` statement before compiling*
+* DHT-11, DHT-21 (AM2301) or DHT-22 (AM2302, AM2320, AM2321, RHT03) sensor
 
 Optional components :
 
@@ -22,12 +21,12 @@ The DHT data, SD CS and LED pins can be defined using the `DHT_PIN`, `SD_CS_PIN`
 Arduino Uno | Components
 ----------- | ----------
 3.3V        | SD 3V3, RTC VCC, DHT pin 1 (left)
-GND         | SD GND, RTC GND, DHT pin 4 (right), LED GND
+GND         | SD GND, RTC GND, LED GND, DHT11/22 pin 4 (right) or AM2320 pin 3 (middle right)
 SDA         | RTC SDA
 SCL         | RTC SCL
 D4          | SD CS
-D8          | DHT pin 2 (middle left)
 D9          | LED
+D10         | DHT pin 2 (middle left)
 D11         | SD MOSI
 D12         | SD MISO
 D13         | SD CLK
@@ -35,13 +34,14 @@ D13         | SD CLK
 ## Setup
 
 1. Clone or download this repository.
-2. Move the contents of the `libraries/` folder into your Arduino IDE libraries folder.
-3. Open `Pan_HT.ino` in the Arduino IDE.
+2. Install PlatformIO.
+3. Open `src/main.cpp` in a text editor.
 4. Edit the `DHT_PIN`, `SD_CS_PIN`, `LED_PIN`, `JUMPER_IN_PIN` and `JUMPER_OUT_PIN` constants if you need to move those pins.
-5. Edit the `DHT_TYPE` constant to match your DHT sensor type.
-6. (Un)comment the `USE_SD`, `USE_RTC`, `RTC_SET`, `USE_JUMPER`, `DEBUG` constants if you need to enable or disable specific features.
-7. Load the firmware onto the Arduino.
-8. Have fun
+6. (Un)comment the `USE_SD`, `USE_RTC`, `USE_JUMPER`, `DEBUG` constants if you need to enable or disable specific features.
+7. Plug in your Arduino and use `pio device list` to find its name.
+8. Set the `PLATFORMIO_UPLOAD_PORT` environment variable to your device name.
+9. Run `pio run -e uno -t upload` for an Arduino Uno or `pio run -e promini -t upload` for a Pro Mini ATMega328 3.3V 8MHz.
+10. Have fun
 
 # Troubleshooting
 
