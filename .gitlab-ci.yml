@@ -1,22 +1,21 @@
-image: slepp/arduino
+image: johannweging/platformio
+stages:
+  - test
 
-verify-dev:
+before_script:
+  - pio update
+
+pan-ht:
   stage: test
-  variables:
-    DEV_BOARD: "arduino:avr:uno"
-  before_script:
-    - mkdir -p /root/Arduino/libraries
-    - cp -R libraries/* /root/Arduino/libraries/
   script:
-    - find . -type f -name '*.ino' -not -path '*/.git/*' | xargs -n1 arduino --verify --verbose --board $DEV_BOARD
+    - pio run -d Pan_HT
 
-verify:
+pan-l:
   stage: test
-  variables:
-    BOARD: "arduino:avr:pro:cpu=8MHzatmega328"
-  before_script:
-    - mkdir -p /root/Arduino/libraries
-    - cp -R libraries/* /root/Arduino/libraries/
   script:
-    - find . -type f -name '*.ino' -not -path '*/.git/*' | xargs -n1 arduino --verify --verbose --board $BOARD
+    - pio run -d Pan_L
 
+pan-uv:
+  stage: test
+  script:
+    - pio run -d Pan_UV
