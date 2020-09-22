@@ -10,19 +10,19 @@ cache:
     - .platformio
 
 before_script:
-  - pio update
+  - update
 
 pan-ht:
   stage: test
   script:
-    - pio run -d Pan_HT
+    - run -d Pan_HT
 
 pan-l:
   stage: test
   script:
-    - pio run -d Pan_L
+    - run -d Pan_L
 
 pan-uv:
   stage: test
   script:
-    - pio run -d Pan_UV
+    - run -d Pan_UV
