@@ -1,4 +1,5 @@
 image: sglahn/platformio-core
+entrypoint: ['']
 stages:
   - test
 
@@ -10,19 +11,19 @@ cache:
     - .platformio
 
 before_script:
-  - update
+  - platformio update
 
 pan-ht:
   stage: test
   script:
-    - run -d Pan_HT
+    - platformio run -d Pan_HT
 
 pan-l:
   stage: test
   script:
-    - run -d Pan_L
+    - platformio run -d Pan_L
 
 pan-uv:
   stage: test
   script:
-    - run -d Pan_UV
+    - platformio run -d Pan_UV
