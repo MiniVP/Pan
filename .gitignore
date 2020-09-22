@@ -1,10 +1,25 @@
 # IDEs
 .vscode/
 .idea/
+[._]*.s[a-v][a-z]
+!*.svg
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+*~
+tags
+[._]*.un~
 
 # PlatformIO
 .pioenvs
 .piolibdeps
+.pio
 CMakeLists.txt
 CMakeListsPrivate.txt
 cmake-build-debug/
+.clang_complete
+.gcc-flags.json
