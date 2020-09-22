@@ -1,5 +1,6 @@
-image: sglahn/platformio-core
-entrypoint: ['']
+image:
+  name: sglahn/platformio-core
+  entrypoint: ['']
 stages:
   - test
 
