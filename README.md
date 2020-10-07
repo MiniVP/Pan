@@ -1,4 +1,4 @@
-![MiniVP Pan](img/banner.png)
+![MiniVP Pan](https://gitlab.com/MiniVP/libpan/-/blob/master/img/banner.png)
 
 A set of autonomous single-sensor stations designed to last long.
 
