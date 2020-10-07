@@ -168,10 +168,6 @@ void Pan::blink(byte nb) {
     }
   }
 
-  char *Pan::nextArg() {
-    return strtok_r(NULL, delim, &last);
-  }
-
   void Pan::ping() {
     Serial.println(F("PONG"));
   }
@@ -217,6 +213,10 @@ void Pan::blink(byte nb) {
   #endif
 
   #if USE_RTC == 1
+    char *Pan::nextArg() {
+      return strtok_r(NULL, delim, &last);
+    }
+
     void Pan::getTimestamp() {
       output.concat(rtc.formatDate(RTCC_DATE_ASIA));
       output.concat('T');
