@@ -3,6 +3,7 @@ stages:
   - test
 
 variables:
+  GIT_SUBMODULE_STRATEGY: normal
   PLATFORMIO_HOME_DIR: "$CI_PROJECT_DIR/.platformio"
 
 cache:
