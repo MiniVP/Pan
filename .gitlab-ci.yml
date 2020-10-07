@@ -1,4 +1,4 @@
-image: johannweging/platformio
+image: python:3-alpine
 stages:
   - test
 
@@ -10,7 +10,9 @@ cache:
     - .platformio
 
 before_script:
-  - pio update
+  - apk add gcompat
+  - ln -s /lib /lib64
+  - pip install platformio
 
 pan-ht:
   stage: test
